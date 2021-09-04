@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Auto Round Corner</string>
+    <string name="service_name">Auto Round Corner Service</string>
+    <string name="service_description">This background service handles Orientation Changes</string>
+    <string name="msg_service_started">Service Started</string>
+    <string name="msg_service_failed_to_start">Service Failed to start</string>
+    <string name="msg_check_permission">Please check this app has a permission for changing secure settings</string>
+    <string name="msg_service_available">Service Available</string>
+    <string name="msg_guide_command">if this app fails, run a command below with your desktop with your device`s \'USB Debugging\' is ON</string>
+    <string name="msg_guide_command_actual">adb shell pm grant moe.laruyan.setroundcorner android.permission.WRITE_SECURE_SETTINGS</string>
+</resources>
