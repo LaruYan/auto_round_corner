@@ -20,7 +20,7 @@ class AutoCornerHandler {
          * @return returns true if errors not found, if found, returns false.
          */
         fun setCorners(context: Context, isEnabled: Boolean): Boolean {
-            val roundedSize: Int = 0 // in dip (maybe)
+            val roundedSize: Int = 57 // in dip (maybe). currently 57 is for A30 in HD+
             val contentPadding: Int =
                 0 // in dip (maybe). currently the developer couldn't found the right value for it. due to Android 11 removed this from secure setting.
 
