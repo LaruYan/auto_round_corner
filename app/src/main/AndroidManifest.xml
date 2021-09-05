@@ -2,9 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="moe.laruyan.setroundcorner">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <uses-permission android:name="moe.laruyan.setroundcorner.USE_ORIENTATION_RECEIVER" />
     <uses-permission android:name="moe.laruyan.setroundcorner.USE_BOOT_COMPLETE_RECEIVER" />
+    <uses-permission android:name="moe.laruyan.setroundcorner.USE_LAUNCHER_SERVICE" />
+    <uses-permission android:name="moe.laruyan.setroundcorner.USE_FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +24,8 @@
             android:directBootAware="true"
             android:enabled="true"
             android:exported="true"
-            android:label="@string/service_foreground_name"></service>
+            android:label="@string/service_foreground_name"
+            android:permission="moe.laruyan.setroundcorner.USE_FOREGROUND_SERVICE" />
 
         <service
             android:name=".AutoCornerLauncherService"
@@ -29,7 +33,8 @@
             android:directBootAware="true"
             android:enabled="true"
             android:exported="true"
-            android:label="@string/service_launcher_name"></service>
+            android:label="@string/service_launcher_name"
+            android:permission="moe.laruyan.setroundcorner.USE_LAUNCHER_SERVICE" />
 
         <receiver
             android:name=".OrientationChangeListener"

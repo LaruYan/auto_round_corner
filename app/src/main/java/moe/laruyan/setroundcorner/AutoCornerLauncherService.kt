@@ -4,9 +4,6 @@ import android.app.*
 import android.content.Intent
 import android.content.Context
 import android.os.Build
-import android.os.SystemClock
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
 
 /**
  * An [IntentService] subclass for handling asynchronous task requests in
@@ -43,13 +40,7 @@ class AutoCornerLauncherService : IntentService("AutoCornerService") {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationManager = ContextCompat.getSystemService(context, NotificationManagerCompat::class.java)
-            if (notificationManager != null) {
-                createNotificationChannel(notificationManager)
-
-                context.startForegroundService(autoCornerServiceEnterIntent)
-                startForeground(NOTIFICATION_ID, createNotificationEntry())
-            }
+            context.startForegroundService(autoCornerServiceEnterIntent)
         } else {
             context.startService(autoCornerServiceEnterIntent)
         }
@@ -66,39 +57,6 @@ class AutoCornerLauncherService : IntentService("AutoCornerService") {
         context.stopService(autoCornerServiceExitIntent)
     }
 
-
-    private fun createNotificationChannel(notificationManager: NotificationManagerCompat) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val autoCornerNotiChannel = NotificationChannel(CHANNEL_ID, getString(R.string.service_foreground_name), NotificationManager.IMPORTANCE_MIN)
-            autoCornerNotiChannel.enableVibration(false)
-            autoCornerNotiChannel.enableLights(false)
-            autoCornerNotiChannel.setSound(null, null)
-            autoCornerNotiChannel.description = getString(R.string.service_foreground_description)
-            notificationManager.createNotificationChannel(autoCornerNotiChannel)
-        }
-    }
-
-    private fun createNotificationEntry(): Notification {
-        lateinit var notificationBuilder: Notification.Builder
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationBuilder = Notification.Builder(applicationContext, CHANNEL_ID)
-        } else {
-            notificationBuilder = Notification.Builder(applicationContext)
-        }
-
-        val launchMainActivityIntent = Intent(applicationContext, MainActivity::class.java)
-        launchMainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        val pendingMainActivityIntent = PendingIntent.getActivity(applicationContext, 0, launchMainActivityIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-        notificationBuilder.setOngoing(true)
-        notificationBuilder.setContentTitle(getString(R.string.service_foreground_name))
-        notificationBuilder.setContentTitle(getString(R.string.service_foreground_description))
-        notificationBuilder.setContentIntent(pendingMainActivityIntent)
-        notificationBuilder.setWhen(SystemClock.currentThreadTimeMillis())
-
-        return notificationBuilder.build()
-    }
-
     companion object {
         private const val LOG_TAG = "AutoCornerLauncherService"
 
@@ -108,9 +66,6 @@ class AutoCornerLauncherService : IntentService("AutoCornerService") {
         const val SERVICE_ENABLED = "moe.laruyan.setroundcorner.extra.SERVICE_ENABLED"
         const val SERVICE_PERSISTENT = "moe.laruyan.setroundcorner.extra.SERVICE_PERSISTENT"
 
-        private const val CHANNEL_ID = "moe.laruyan.setroundcorner.NOTI_CHANNEL.AUTO_CORNER_FOREGROUND_RUNNING"
-        private const val NOTIFICATION_ID = 0xC0FFEE
-
         /**
          * Starts this service to perform action Enter with the given parameters. If
          * the service is already performing a task this action will be queued.
@@ -119,7 +74,7 @@ class AutoCornerLauncherService : IntentService("AutoCornerService") {
          */
         @JvmStatic
         fun startActionEnter(context: Context, isEnabled: Boolean, isPersistent: Boolean) {
-            val intent = Intent(context, AutoCornerForegroundService::class.java).apply {
+            val intent = Intent(context, AutoCornerLauncherService::class.java).apply {
                 action = ENTER_SERVICE
                 putExtra(SERVICE_ENABLED, isEnabled)
                 putExtra(SERVICE_PERSISTENT, isPersistent)
@@ -134,7 +89,7 @@ class AutoCornerLauncherService : IntentService("AutoCornerService") {
          */
         @JvmStatic
         fun startActionExit(context: Context) {
-            val intent = Intent(context, AutoCornerForegroundService::class.java).apply {
+            val intent = Intent(context, AutoCornerLauncherService::class.java).apply {
                 action = EXIT_SERVICE
             }
             context.startService(intent)
