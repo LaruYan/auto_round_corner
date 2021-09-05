@@ -32,7 +32,7 @@ class AutoCornerHandler {
 
             if (!gotError && isEnabled) {
                 try {
-                    // first, reset to refresh
+                    // first, if don't set to 0, second step won't work
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 //                    Runtime.getRuntime().exec("settings put secure sysui_rounded_size 0");// not works
                         Settings.Secure.putInt(context.contentResolver, "sysui_rounded_size", 0);
