@@ -47,8 +47,10 @@
             android:permission="moe.laruyan.setroundcorner.USE_BOOT_COMPLETE_RECEIVER" >
             <intent-filter>
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.REBOOT" />
+                <action android:name="com.htc.action.QUICKBOOT_POWERON" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
     </application>
