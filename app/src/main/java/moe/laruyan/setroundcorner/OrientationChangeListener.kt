@@ -72,7 +72,7 @@ class OrientationChangeListener() : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        var actionNecessary  = false
+        val actionNecessary: Boolean
         val newOrientation: Int = context.resources.configuration.orientation
 
         if (currentOrientation == null) {
@@ -83,8 +83,10 @@ class OrientationChangeListener() : BroadcastReceiver() {
 
         if (actionNecessary) {
             doWriteSettings(context)
+            return
         } else {
-            // don't do anything if action is not required;
+            // don't do anything if action is not required
+            return
         }
     }
 

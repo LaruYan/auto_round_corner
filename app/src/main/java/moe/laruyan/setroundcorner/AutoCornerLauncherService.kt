@@ -74,7 +74,7 @@ class AutoCornerLauncherService : IntentService("AutoCornerService") {
             autoCornerNotiChannel.enableLights(false)
             autoCornerNotiChannel.setSound(null, null)
             autoCornerNotiChannel.description = getString(R.string.service_foreground_description)
-            notificationManager.createNotificationChannel(autoCornerNotiChannel);
+            notificationManager.createNotificationChannel(autoCornerNotiChannel)
         }
     }
 
@@ -100,7 +100,7 @@ class AutoCornerLauncherService : IntentService("AutoCornerService") {
     }
 
     companion object {
-        private val LOG_TAG = "AutoCornerLauncherService"
+        private const val LOG_TAG = "AutoCornerLauncherService"
 
         const val ENTER_SERVICE = "moe.laruyan.setroundcorner.action.ENTER_SERVICE"
         const val EXIT_SERVICE = "moe.laruyan.setroundcorner.action.EXIT_SERVICE"
@@ -108,8 +108,8 @@ class AutoCornerLauncherService : IntentService("AutoCornerService") {
         const val SERVICE_ENABLED = "moe.laruyan.setroundcorner.extra.SERVICE_ENABLED"
         const val SERVICE_PERSISTENT = "moe.laruyan.setroundcorner.extra.SERVICE_PERSISTENT"
 
-        private val CHANNEL_ID = "moe.laruyan.setroundcorner.NOTI_CHANNEL.AUTO_CORNER_FOREGROUND_RUNNING"
-        private val NOTIFICATION_ID = 0xC0FFEE
+        private const val CHANNEL_ID = "moe.laruyan.setroundcorner.NOTI_CHANNEL.AUTO_CORNER_FOREGROUND_RUNNING"
+        private const val NOTIFICATION_ID = 0xC0FFEE
 
         /**
          * Starts this service to perform action Enter with the given parameters. If

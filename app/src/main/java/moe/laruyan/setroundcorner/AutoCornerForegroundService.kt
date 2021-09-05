@@ -34,6 +34,7 @@ class AutoCornerForegroundService() : Service() {
     }
 
     override fun onBind(intent: Intent): IBinder {
+        // not implemented
         TODO("Return the communication channel to the service.")
     }
 
@@ -59,6 +60,6 @@ class AutoCornerForegroundService() : Service() {
     }
 
     companion object {
-        private val LOG_TAG = "AutoCornerForegroundService"
+        private const val LOG_TAG = "AutoCornerForegroundService"
     }
 }
