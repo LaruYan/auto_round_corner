@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity() {
         if (AutoCornerHandler.setCorners(applicationContext, true)) {
             tvGuideCommand?.text = getString(R.string.msg_service_started)
             tvGuideCommandActual?.text = ""
-            AutoCornerService.startActionEnter(applicationContext, true, true)
+            AutoCornerLauncherService.startActionEnter(applicationContext, true, true)
         } else {
             Toast.makeText(applicationContext, applicationContext.getString(R.string.msg_check_permission), Toast.LENGTH_SHORT).show()
             tvGuideCommand?.text = getString(R.string.msg_guide_command)
             tvGuideCommandActual?.text = getString(R.string.msg_guide_command_actual)
-            AutoCornerService.startActionExit(applicationContext)
+            AutoCornerLauncherService.startActionExit(applicationContext)
         }
     }
 }

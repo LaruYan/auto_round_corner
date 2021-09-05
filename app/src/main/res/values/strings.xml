@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Auto Round Corner</string>
-    <string name="service_name">Auto Round Corner Service</string>
-    <string name="service_description">This background service handles Orientation Changes</string>
+    <string name="service_launcher_name">Auto Round Corner Launcher Service</string>
+    <string name="service_launcher_description">This launcher service handles service lifecycle.</string>
+    <string name="service_foreground_name">Auto Round Corner Background Service</string>
+    <string name="service_foreground_description">This background service handles Orientation Changes</string>
     <string name="msg_service_started">Service Started</string>
     <string name="msg_service_failed_to_start">Service Failed to start</string>
     <string name="msg_check_permission">Please check this app has a permission for changing secure settings</string>

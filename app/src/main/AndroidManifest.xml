@@ -15,6 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutoRoundCorner">
 
+        <service
+            android:name=".AutoCornerForegroundService"
+            android:description="@string/service_foreground_description"
+            android:directBootAware="true"
+            android:enabled="true"
+            android:exported="true"
+            android:label="@string/service_foreground_name"></service>
+
+        <service
+            android:name=".AutoCornerLauncherService"
+            android:description="@string/service_launcher_description"
+            android:directBootAware="true"
+            android:enabled="true"
+            android:exported="true"
+            android:label="@string/service_launcher_name"></service>
+
         <receiver
             android:name=".OrientationChangeListener"
             android:directBootAware="true"
@@ -22,16 +38,10 @@
             android:exported="true"
             android:permission="moe.laruyan.setroundcorner.USE_ORIENTATION_RECEIVER" />
 
-        <service
-            android:name=".AutoCornerService"
-            android:description="@string/service_description"
-            android:directBootAware="true"
-            android:exported="false"
-            android:label="@string/service_name" />
-
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +54,7 @@
             android:directBootAware="true"
             android:enabled="true"
             android:exported="true"
-            android:permission="moe.laruyan.setroundcorner.USE_BOOT_COMPLETE_RECEIVER" >
+            android:permission="moe.laruyan.setroundcorner.USE_BOOT_COMPLETE_RECEIVER">
             <intent-filter>
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
